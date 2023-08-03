@@ -1,0 +1,87 @@
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Bungee', sans-serif;
+    color: #1d3461;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.calculator {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 480px;
+    height: 500px;
+    border: 2px solid rgb(92, 89, 89);
+    border-radius: 8px;
+    padding: 20px;
+    gap: 16px;
+}
+
+#screen {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #1d3461;
+    padding: 20px 150px;
+    border-radius: 4px;
+}
+
+.calculations {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.key {
+    width: 100px;
+    height: 50px;
+}
+
+.delete {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 20px;
+}
+
+.cleardelete {
+    width: 200px;
+    height: 50px;
+}
+
+button {
+    border: 1px solid rgb(119, 117, 117);
+    border-radius: 4px;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    margin: 16px;
+    gap: 4px;
+}
+
+a {
+    text-decoration: none;
+    font-family: 'Bungee', sans-serif;
+    color: #1d3461;
+}
