@@ -6,21 +6,33 @@ const result = document.querySelector(".result");
 let num1 = "";
 let num2 = "";
 let opr;
+let subtotal;
 let continueLoop1 = true;
 let continueLoop2 = true;
 
 
-// Stop remembering the first number when the operator is pressed
-operators.forEach(operator => {
-    operator.addEventListener("click", (e) => {
-        continueLoop1 = false;
-        opr = operator.innerHTML;
-    });
-});
 
 // Stop remembering the second number when the = is pressed
 result.addEventListener("click", (e) => {
     continueLoop2 = false;
+});
+
+
+// TEEEST Stop remembering the first number when the operator is pressed
+operators.forEach(operator => {
+    operator.addEventListener("click", (e) => {
+        if (num2 == "") {
+            continueLoop1 = false;
+            opr = operator.innerHTML;
+            updateDisplay(opr);
+        } else {
+            // continueLoop2 = true;
+            num1 = operate(num1, num2, opr);
+            opr = operator.innerHTML;
+            updateDisplay(opr);
+            num2 = "";
+        }
+    });
 });
 
 // Function to unity everything WIP
@@ -28,18 +40,18 @@ keys.forEach(key => {
     key.addEventListener("click", (e) => {
         if (continueLoop1 == true) {
             num1 += key.innerHTML;
-            console.log(num1);
+            updateDisplay(key.innerHTML);
         } else if (continueLoop2 == true) {
             if(!key.className.includes("operator")) {
                 num2 += key.innerHTML;
-                console.log(num2);
+                updateDisplay(key.innerHTML);
             };
         } else {
-            console.log(operate(num1, num2, opr));
+            subtotal = operate(num1, num2, opr);
+            console.log(subtotal)
         }
     });
 });
-
 
 
 // operator function
@@ -57,7 +69,13 @@ function operate(numberOne, numberTwo, operation) {
 
 
 // function to populate the display number buttons are clicked
-// const display = document.querySelector("#screen");
-// function updateDisplay(one) {
-//     display.textContent += one;
-// }
+const display = document.querySelector("#culcScreen");
+function updateDisplay(one) {
+    display.textContent += one;
+}
+
+// function to populate the SUM display number buttons are clicked
+const displaySum = document.querySelector("#sumScreen");
+function updateDisplaySum(one) {
+    displaySum.textContent += one;
+}
