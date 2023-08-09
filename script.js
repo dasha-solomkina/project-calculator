@@ -1,7 +1,10 @@
-const numbers = document.querySelectorAll(".number"); // needed? 
+// const numbers = document.querySelectorAll(".number"); // needed? 
 const operators = document.querySelectorAll(".operator");
 const keys = document.querySelectorAll(".key");
 const result = document.querySelector(".result");
+const deleteButton = document.querySelector("#delete");
+const clear = document.querySelector("#clear");
+
 
 let num1 = "";
 let num2 = "";
@@ -11,14 +14,13 @@ let continueLoop1 = true;
 let continueLoop2 = true;
 
 
-
 // Stop remembering the second number when the = is pressed
 result.addEventListener("click", (e) => {
     continueLoop2 = false;
 });
 
 
-// TEEEST Stop remembering the first number when the operator is pressed
+// Stop remembering the first number when the operator is pressed
 operators.forEach(operator => {
     operator.addEventListener("click", (e) => {
         if (num2 == "") {
@@ -35,7 +37,7 @@ operators.forEach(operator => {
     });
 });
 
-// Function to unity everything WIP
+// Function to unity everything
 keys.forEach(key => {
     key.addEventListener("click", (e) => {
         if (continueLoop1 == true) {
@@ -48,7 +50,7 @@ keys.forEach(key => {
             };
         } else {
             subtotal = operate(num1, num2, opr);
-            console.log(subtotal)
+            updateDisplaySum(subtotal)
         }
     });
 });
@@ -62,6 +64,9 @@ function operate(numberOne, numberTwo, operation) {
         return numberOne - numberTwo;
     } else if (operation == "x") {
         return numberOne * numberTwo;
+    } else if (operation == "/" && numberTwo == 0) {
+        alert("You cannot devide by 0");
+        return "∞"
     } else if (operation == "/") {
         return (numberOne / numberTwo).toFixed(2);
     };
@@ -79,3 +84,18 @@ const displaySum = document.querySelector("#sumScreen");
 function updateDisplaySum(one) {
     displaySum.textContent += one;
 }
+
+// Clean everything 
+clear.addEventListener("click", (e) => {
+    num1 = "";
+    num2 = "";
+    opr = null;
+    subtotal = null;
+    continueLoop1 = true;
+    continueLoop2 = true;
+    display.textContent = "";
+    displaySum.textContent = "";
+});
+
+
+// testing key
