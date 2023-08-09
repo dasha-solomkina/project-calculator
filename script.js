@@ -87,7 +87,7 @@ function operate(numberOne, numberTwo, operation) {
 };
 
 
-// Clean everything ------------------- ADD BACKSPACE LATER
+// Clean everything -------when number is clicked after the sum------------ ADD BACKSPACE LATER
 clear.addEventListener("click", (e) => {
     num1 = "";
     num2 = "";
@@ -100,10 +100,8 @@ clear.addEventListener("click", (e) => {
 });
 
 
-
-
 // run calculator with keyboard or clicks
-const myArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "*", "+", "-", "Enter"];
+const myArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "*", "+", "-", "Enter", "."];
 document.addEventListener("keydown", handleInteraction);
 keys.forEach(key => key.addEventListener("click", handleInteraction));
 
