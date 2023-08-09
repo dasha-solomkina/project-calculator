@@ -4,7 +4,8 @@ const keys = document.querySelectorAll(".key");
 const result = document.querySelector(".result");
 const deleteButton = document.querySelector("#delete");
 const clear = document.querySelector("#clear");
-
+const display = document.querySelector("#culcScreen");
+const displaySum = document.querySelector("#sumScreen");
 
 let num1 = "";
 let num2 = "";
@@ -12,6 +13,16 @@ let opr;
 let subtotal;
 let continueLoop1 = true;
 let continueLoop2 = true;
+
+// populate the display
+function updateDisplay(one) {
+    display.textContent += one;
+};
+
+// populate the SUM display
+function updateDisplaySum(one) {
+    displaySum.textContent += one;
+};
 
 
 // Stop remembering the second number when the = is pressed
@@ -34,7 +45,6 @@ operators.forEach(operator => {
             opr = operator.innerHTML;
             updateDisplay(opr);
         } else {
-            // continueLoop2 = true;
             num1 = operate(num1, num2, opr);
             opr = operator.innerHTML;
             updateDisplay(opr);
@@ -43,22 +53,20 @@ operators.forEach(operator => {
     });
 });
 
-// Function to unity everything
-keys.forEach(key => {
-    key.addEventListener("click", (e) => {
-        if (continueLoop1 == true) {
-            num1 += key.innerHTML;
-            updateDisplay(key.innerHTML);
-        } else if (continueLoop2 == true) {
-            if(!key.className.includes("operator")) {
-                num2 += key.innerHTML;
-                updateDisplay(key.innerHTML);
-            };
+
+document.addEventListener("keydown", (event) => {
+    if (event.key == "/" || event.key == "*" || event.key == "+" || event.key == "-") {
+        if (num2 == "") {
+            continueLoop1 = false;
+            opr = event.key;
+            updateDisplay(opr);
         } else {
-            subtotal = operate(num1, num2, opr);
-            updateDisplaySum(subtotal)
-        }
-    });
+            num1 = operate(num1, num2, opr);
+            opr = event.key;
+            updateDisplay(opr);
+            num2 = "";
+        };
+    };
 });
 
 
@@ -79,19 +87,7 @@ function operate(numberOne, numberTwo, operation) {
 };
 
 
-// function to populate the display number buttons are clicked
-const display = document.querySelector("#culcScreen");
-function updateDisplay(one) {
-    display.textContent += one;
-}
-
-// function to populate the SUM display number buttons are clicked
-const displaySum = document.querySelector("#sumScreen");
-function updateDisplaySum(one) {
-    displaySum.textContent += one;
-}
-
-// Clean everything 
+// Clean everything ------------------- ADD BACKSPACE LATER
 clear.addEventListener("click", (e) => {
     num1 = "";
     num2 = "";
@@ -105,36 +101,19 @@ clear.addEventListener("click", (e) => {
 
 
 
-// Stop remembering the first number when the operator is pressed(KEYSSSSS)
 
-document.addEventListener("keydown", (event) => {
-    if (event.key == "/" || event.key == "*" || event.key == "+" || event.key == "-") {
-        if (num2 == "") {
-            continueLoop1 = false;
-            opr = event.key; ///// change
-            updateDisplay(opr);
-        } else {
-            // continueLoop2 = true;
-            num1 = operate(num1, num2, opr);
-            opr = event.key; ///// change
-            updateDisplay(opr);
-            num2 = "";
-        };
-    };
-});
-
-
-
-// testing key
+// run calculator with keyboard or clicks
 const myArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "*", "+", "-", "Enter"];
 document.addEventListener("keydown", handleInteraction);
+keys.forEach(key => key.addEventListener("click", handleInteraction));
+
 
 function handleInteraction(event) {
     if (event.type === "keydown") {
         if(myArray.includes(event.key)){
             if (continueLoop1 == true) {
                 num1 += event.key; 
-                updateDisplay(event.key); 
+                updateDisplay(event.key);
             } else if (continueLoop2 == true) {
                 if(event.key !== "/" && event.key !== "*" && event.key !== "+" && event.key !== "-") {
                     num2 += event.key; 
@@ -145,6 +124,19 @@ function handleInteraction(event) {
                 updateDisplaySum(subtotal)
             };
         };
+    } else if (event.type === "click") {
+        if (continueLoop1 == true) {
+            num1 += event.target.innerHTML;
+            updateDisplay(event.target.innerHTML);
+        } else if (continueLoop2 == true) {
+            if(!event.target.className.includes("operator")) {
+                num2 += event.target.innerHTML;
+                updateDisplay(event.target.innerHTML);
+            };
+        } else {
+            subtotal = operate(num1, num2, opr);
+            updateDisplaySum(subtotal)
+        }
     };
 };
 
