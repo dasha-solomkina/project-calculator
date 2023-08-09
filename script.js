@@ -110,12 +110,20 @@ function handleInteraction(event) {
     if (event.type === "keydown") {
         if(myArray.includes(event.key)){
             if (continueLoop1 == true) {
-                num1 += event.key; 
-                updateDisplay(event.key);
+                if (event.key == "." && num1.includes(".")) {
+                    num1;
+                } else {
+                    num1 += event.key; 
+                    updateDisplay(event.key);
+                };
             } else if (continueLoop2 == true) {
                 if(event.key !== "/" && event.key !== "*" && event.key !== "+" && event.key !== "-") {
-                    num2 += event.key; 
+                    if (event.key == "." && num2.includes(".")) {
+                        num1;
+                    } else {
+                        num2 += event.key; 
                     updateDisplay(event.key);
+                    };
                 };
             } else {
                 subtotal = operate(num1, num2, opr);
@@ -137,4 +145,7 @@ function handleInteraction(event) {
         }
     };
 };
+
+
+
 
