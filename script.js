@@ -132,12 +132,20 @@ function handleInteraction(event) {
         };
     } else if (event.type === "click") {
         if (continueLoop1 == true) {
-            num1 += event.target.innerHTML;
-            updateDisplay(event.target.innerHTML);
+            if (event.target.innerHTML == "." && num1.includes(".")) {
+                num1;
+            } else {
+                num1 += event.target.innerHTML; 
+                updateDisplay(event.target.innerHTML);
+            };
         } else if (continueLoop2 == true) {
             if(!event.target.className.includes("operator")) {
-                num2 += event.target.innerHTML;
-                updateDisplay(event.target.innerHTML);
+                if (event.target.innerHTML == "." && num2.includes(".")) {
+                    num2;
+                } else {
+                    num2 += event.target.innerHTML; 
+                    updateDisplay(event.target.innerHTML);
+                };
             };
         } else {
             subtotal = operate(num1, num2, opr);
@@ -145,7 +153,3 @@ function handleInteraction(event) {
         }
     };
 };
-
-
-
-
