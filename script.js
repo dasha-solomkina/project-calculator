@@ -19,6 +19,12 @@ result.addEventListener("click", (e) => {
     continueLoop2 = false;
 });
 
+document.addEventListener("keydown", (event) => {
+    if (event.key == "Enter") {
+        continueLoop2 = false;
+    };
+});
+
 
 // Stop remembering the first number when the operator is pressed
 operators.forEach(operator => {
@@ -98,4 +104,47 @@ clear.addEventListener("click", (e) => {
 });
 
 
+
+// Stop remembering the first number when the operator is pressed(KEYSSSSS)
+
+document.addEventListener("keydown", (event) => {
+    if (event.key == "/" || event.key == "*" || event.key == "+" || event.key == "-") {
+        if (num2 == "") {
+            continueLoop1 = false;
+            opr = event.key; ///// change
+            updateDisplay(opr);
+        } else {
+            // continueLoop2 = true;
+            num1 = operate(num1, num2, opr);
+            opr = event.key; ///// change
+            updateDisplay(opr);
+            num2 = "";
+        };
+    };
+});
+
+
+
 // testing key
+const myArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "*", "+", "-", "Enter"];
+document.addEventListener("keydown", handleInteraction);
+
+function handleInteraction(event) {
+    if (event.type === "keydown") {
+        if(myArray.includes(event.key)){
+            if (continueLoop1 == true) {
+                num1 += event.key; 
+                updateDisplay(event.key); 
+            } else if (continueLoop2 == true) {
+                if(event.key !== "/" && event.key !== "*" && event.key !== "+" && event.key !== "-") {
+                    num2 += event.key; 
+                    updateDisplay(event.key);
+                };
+            } else {
+                subtotal = operate(num1, num2, opr);
+                updateDisplaySum(subtotal)
+            };
+        };
+    };
+};
+
