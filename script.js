@@ -76,7 +76,7 @@ function operate(numberOne, numberTwo, operation) {
         return +numberOne + +numberTwo;
     } else if (operation == "-"){
         return numberOne - numberTwo;
-    } else if (operation == "x") {
+    } else if (operation == "*") {
         return numberOne * numberTwo;
     } else if (operation == "/" && numberTwo == 0) {
         alert("You cannot devide by 0");
