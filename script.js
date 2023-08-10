@@ -1,4 +1,3 @@
-// const numbers = document.querySelectorAll(".number"); // needed? 
 const operators = document.querySelectorAll(".operator");
 const keys = document.querySelectorAll(".key");
 const result = document.querySelector(".result");
@@ -13,6 +12,8 @@ let opr;
 let subtotal;
 let continueLoop1 = true;
 let continueLoop2 = true;
+let continueLoop3 = true;
+
 
 // populate the display
 function updateDisplay(one) {
@@ -22,8 +23,13 @@ function updateDisplay(one) {
 // populate the SUM display
 function updateDisplaySum(one) {
     displaySum.textContent += one;
+    continueLoop3 = false;
 };
 
+// make the result number pretty 
+function trimResult (number) {
+    return parseFloat(Number(number.toFixed(2)))
+};
 
 // Stop remembering the second number when the = is pressed
 result.addEventListener("click", (e) => {
@@ -87,8 +93,10 @@ function operate(numberOne, numberTwo, operation) {
 };
 
 
-// Clean everything -------when number is clicked after the sum------------ ADD BACKSPACE LATER
-clear.addEventListener("click", (e) => {
+// Clean everything ------when number is clicked after the sum
+clear.addEventListener("click", startOver);
+
+function startOver() {
     num1 = "";
     num2 = "";
     opr = null;
@@ -97,7 +105,7 @@ clear.addEventListener("click", (e) => {
     continueLoop2 = true;
     display.textContent = "";
     displaySum.textContent = "";
-});
+};
 
 
 // run calculator with keyboard or clicks
@@ -125,10 +133,17 @@ function handleInteraction(event) {
                     updateDisplay(event.key);
                     };
                 };
-            } else {
+            } else if (continueLoop3 == true) {
                 subtotal = operate(num1, num2, opr);
-                updateDisplaySum(subtotal)
-            };
+                updateDisplaySum(subtotal);
+            } else {
+                startOver();
+                num1 += event.key;
+                updateDisplay(num1);
+                continueLoop1 = true;
+                continueLoop2 = true;
+                continueLoop3 = true;
+            }
         };
     } else if (event.type === "click") {
         if (continueLoop1 == true) {
@@ -147,15 +162,24 @@ function handleInteraction(event) {
                     updateDisplay(event.target.innerHTML);
                 };
             };
-        } else {
+        } else if (continueLoop3 == true) {
             subtotal = operate(num1, num2, opr);
             updateDisplaySum(subtotal);
+        } else {
+            startOver();    
+            num1 += event.target.innerHTML;
+            updateDisplay(num1);
+            continueLoop1 = true;
+            continueLoop2 = true;
+            continueLoop3 = true;
         }
     };
 };
 
 
-// make the result number pretty 
-function trimResult (number) {
-    return parseFloat(Number(number.toFixed(2)))
-};
+// Playground
+
+// else {
+//     subtotal = operate(num1, num2, opr);
+//     updateDisplaySum(subtotal);
+// }
