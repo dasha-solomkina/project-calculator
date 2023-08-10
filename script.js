@@ -73,16 +73,16 @@ document.addEventListener("keydown", (event) => {
 // operator function
 function operate(numberOne, numberTwo, operation) {
     if (operation == "+") {
-        return +numberOne + +numberTwo;
+        return trimResult(+numberOne + +numberTwo);
     } else if (operation == "-"){
-        return numberOne - numberTwo;
+        return trimResult(numberOne - numberTwo);
     } else if (operation == "*") {
-        return numberOne * numberTwo;
+        return trimResult(numberOne * numberTwo);
     } else if (operation == "/" && numberTwo == 0) {
         alert("You cannot devide by 0");
-        return "∞"
+        return "∞";
     } else if (operation == "/") {
-        return (numberOne / numberTwo).toFixed(2);
+        return trimResult(numberOne / numberTwo);
     };
 };
 
@@ -149,7 +149,13 @@ function handleInteraction(event) {
             };
         } else {
             subtotal = operate(num1, num2, opr);
-            updateDisplaySum(subtotal)
+            updateDisplaySum(subtotal);
         }
     };
+};
+
+
+// make the result number pretty 
+function trimResult (number) {
+    return parseFloat(Number(number.toFixed(2)))
 };
