@@ -103,6 +103,7 @@ function startOver() {
     subtotal = null;
     continueLoop1 = true;
     continueLoop2 = true;
+    continueLoop3 = true;
     display.textContent = "";
     displaySum.textContent = "";
 };
@@ -166,7 +167,7 @@ function handleInteraction(event) {
             subtotal = operate(num1, num2, opr);
             updateDisplaySum(subtotal);
         } else {
-            startOver();    
+            startOver();        
             num1 += event.target.innerHTML;
             updateDisplay(num1);
             continueLoop1 = true;
