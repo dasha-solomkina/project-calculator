@@ -13,11 +13,17 @@ let subtotal;
 let continueLoop1 = true;
 let continueLoop2 = true;
 let continueLoop3 = true;
+let operatorArray = ["/", "*", "+", "-"];
 
 
 // populate the display
 function updateDisplay(one) {
     display.textContent += one;
+};
+
+// replace operator when clicked several times
+function replaceDisplay(one) {
+    display.textContent = display.textContent.slice(0, -1) + one;
 };
 
 // populate the SUM display
@@ -43,21 +49,28 @@ document.addEventListener("keydown", (event) => {
 });
 
 
-// Stop remembering the first number when the operator is pressed
+// Stop remembering the first number when the operator is pressed 
 operators.forEach(operator => {
     operator.addEventListener("click", (e) => {
         if (num2 == "") {
             continueLoop1 = false;
             opr = operator.innerHTML;
-            updateDisplay(opr);
+            if(operatorArray.includes(display.textContent.slice(-1))) {
+                console.log("works if - replace")
+                replaceDisplay(opr);
+            } else {
+                console.log("works else first")
+                updateDisplay(opr);
+            };
         } else {
             num1 = operate(num1, num2, opr);
             opr = operator.innerHTML;
             updateDisplay(opr);
-            num2 = "";
-        }
+            num2 = "";   
+        };
     });
 });
+
 
 
 document.addEventListener("keydown", (event) => {
