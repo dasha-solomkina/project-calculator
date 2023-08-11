@@ -56,10 +56,8 @@ operators.forEach(operator => {
             continueLoop1 = false;
             opr = operator.innerHTML;
             if(operatorArray.includes(display.textContent.slice(-1))) {
-                console.log("works if - replace")
                 replaceDisplay(opr);
             } else {
-                console.log("works else first")
                 updateDisplay(opr);
             };
         } else {
@@ -72,13 +70,16 @@ operators.forEach(operator => {
 });
 
 
-
 document.addEventListener("keydown", (event) => {
     if (event.key == "/" || event.key == "*" || event.key == "+" || event.key == "-") {
         if (num2 == "") {
             continueLoop1 = false;
             opr = event.key;
-            updateDisplay(opr);
+            if(operatorArray.includes(display.textContent.slice(-1))) {
+                replaceDisplay(opr);
+            } else {
+                updateDisplay(opr);
+            };
         } else {
             num1 = operate(num1, num2, opr);
             opr = event.key;
