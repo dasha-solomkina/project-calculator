@@ -15,6 +15,18 @@ let continueLoop2 = true;
 let continueLoop3 = true;
 let operatorArray = ["/", "*", "+", "-"];
 
+// TESTING DELETE
+
+deleteButton.addEventListener("click", () => {
+    if (continueLoop1 == true) {
+        num1 = num1.slice(0, -1);
+        display.textContent = display.textContent.slice(0, -1);
+    } else if (continueLoop2 == true) {
+        num2 = num2.slice(0, -1);
+        display.textContent = display.textContent.slice(0, -1);
+    };
+});
+
 
 // populate the display
 function updateDisplay(one) {
