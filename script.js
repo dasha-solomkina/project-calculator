@@ -63,7 +63,6 @@ operators.forEach(operator => {
         } else if (!subtotal == "") {
             updateDisplay(opr);
             opr = operator.innerHTML;
-            console.log("added line");
         } else {
             num1 = operate(num1, num2, opr);
             opr = operator.innerHTML;
@@ -84,7 +83,10 @@ document.addEventListener("keydown", (event) => {
             } else {
                 updateDisplay(opr);
             };
-        } else {
+        } else if (!subtotal == "") {
+            updateDisplay(opr);
+            opr = event.key;
+        }else {
             num1 = operate(num1, num2, opr);
             opr = event.key;
             updateDisplay(opr);
@@ -155,6 +157,14 @@ function handleInteraction(event) {
             } else if (continueLoop3 == true) {
                 subtotal = operate(num1, num2, opr);
                 updateDisplaySum(subtotal);
+            } else if (operatorArray.includes(event.key)) {
+                num1 = subtotal;
+                num2 = "";
+                displaySum.textContent = null;
+                display.textContent = num1 + opr;
+                continueLoop2 = true;
+                continueLoop3 = true;
+                subtotal = "";
             } else {
                 startOver();
                 num1 += event.key;
@@ -192,8 +202,6 @@ function handleInteraction(event) {
             continueLoop2 = true;
             continueLoop3 = true;
             subtotal = "";
-   
-            console.log("better")
         } else {
             startOver();        
             num1 += event.target.innerHTML;
