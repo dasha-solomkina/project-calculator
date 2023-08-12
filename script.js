@@ -55,11 +55,15 @@ operators.forEach(operator => {
         if (num2 == "") {
             continueLoop1 = false;
             opr = operator.innerHTML;
-            if(operatorArray.includes(display.textContent.slice(-1))) {
+            if (operatorArray.includes(display.textContent.slice(-1))) {
                 replaceDisplay(opr);
             } else {
                 updateDisplay(opr);
             };
+        } else if (!subtotal == "") {
+            updateDisplay(opr);
+            opr = operator.innerHTML;
+            console.log("added line");
         } else {
             num1 = operate(num1, num2, opr);
             opr = operator.innerHTML;
@@ -180,6 +184,16 @@ function handleInteraction(event) {
         } else if (continueLoop3 == true) {
             subtotal = operate(num1, num2, opr);
             updateDisplaySum(subtotal);
+        } else if (operatorArray.includes(event.target.innerHTML)) {
+            num1 = subtotal;
+            num2 = "";
+            displaySum.textContent = null;
+            display.textContent = num1 + opr;
+            continueLoop2 = true;
+            continueLoop3 = true;
+            subtotal = "";
+   
+            console.log("better")
         } else {
             startOver();        
             num1 += event.target.innerHTML;
@@ -192,9 +206,3 @@ function handleInteraction(event) {
 };
 
 
-// Playground
-
-// else {
-//     subtotal = operate(num1, num2, opr);
-//     updateDisplaySum(subtotal);
-// }
