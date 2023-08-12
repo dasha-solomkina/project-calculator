@@ -15,17 +15,33 @@ let continueLoop2 = true;
 let continueLoop3 = true;
 let operatorArray = ["/", "*", "+", "-"];
 
-// TESTING DELETE
 
-deleteButton.addEventListener("click", () => {
-    if (continueLoop1 == true) {
-        num1 = num1.slice(0, -1);
-        display.textContent = display.textContent.slice(0, -1);
-    } else if (continueLoop2 == true) {
-        num2 = num2.slice(0, -1);
-        display.textContent = display.textContent.slice(0, -1);
+// Delete function
+function deleteInput(event) {
+    if (event.type == "click") {
+        if (continueLoop1 == true) {
+            num1 = num1.slice(0, -1);
+            display.textContent = display.textContent.slice(0, -1);
+        } else if (continueLoop2 == true) {
+            num2 = num2.slice(0, -1);
+            display.textContent = display.textContent.slice(0, -1);
+        };
+    } else {
+        if (event.key == "Backspace") {
+            if (continueLoop1 == true) {
+                num1 = num1.slice(0, -1);
+                display.textContent = display.textContent.slice(0, -1);
+            } else if (continueLoop2 == true) {
+                num2 = num2.slice(0, -1);
+                display.textContent = display.textContent.slice(0, -1);
+            };
+        };
     };
-});
+};
+
+// execute detele when a button or a backspace are clicked
+deleteButton.addEventListener("click", deleteInput);
+document.addEventListener("keydown", deleteInput)
 
 
 // populate the display
