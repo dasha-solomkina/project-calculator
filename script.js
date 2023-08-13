@@ -16,7 +16,7 @@ let continueLoop3 = true;
 let operatorArray = ["/", "*", "+", "-"];
 
 
-// Delete function
+// delete function
 function deleteInput(event) {
     if (event.type == "click") {
         if (continueLoop1 == true) {
@@ -43,7 +43,6 @@ function deleteInput(event) {
 deleteButton.addEventListener("click", deleteInput);
 document.addEventListener("keydown", deleteInput)
 
-
 // populate the display
 function updateDisplay(one) {
     display.textContent += one;
@@ -65,7 +64,7 @@ function trimResult (number) {
     return parseFloat(Number(number.toFixed(2)))
 };
 
-// Stop remembering the second number when the = is pressed
+// stop remembering the second number when the = is pressed
 result.addEventListener("click", (e) => {
     continueLoop2 = false;
 });
@@ -77,7 +76,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 
-// Stop remembering the first number when the operator is pressed 
+// stop remembering the first number and update the operator
 operators.forEach(operator => {
     operator.addEventListener("click", (e) => {
         if (num2 == "") {
@@ -141,7 +140,7 @@ function operate(numberOne, numberTwo, operation) {
 };
 
 
-// Clean everything ------when number is clicked after the sum
+// clean function
 clear.addEventListener("click", startOver);
 
 function startOver() {
@@ -157,7 +156,7 @@ function startOver() {
 };
 
 
-// run calculator with keyboard or clicks
+// run the calculator with keyboard or/and clicks
 const myArray = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "/", "*", "+", "-", "Enter", "."];
 document.addEventListener("keydown", handleInteraction);
 keys.forEach(key => key.addEventListener("click", handleInteraction));
@@ -240,5 +239,3 @@ function handleInteraction(event) {
         }
     };
 };
-
-
