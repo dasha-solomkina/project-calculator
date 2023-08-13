@@ -49,6 +49,7 @@ body {
 
 #culcScreen {
     text-align: right;
+    letter-spacing: 0.05em;  
     font-size: 26px;
     padding-top: 15px;
     padding-right: 30px;
