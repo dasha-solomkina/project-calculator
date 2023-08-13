@@ -41,7 +41,7 @@ function deleteInput(event) {
 
 // execute detele when a button or a backspace are clicked
 deleteButton.addEventListener("click", deleteInput);
-document.addEventListener("keydown", deleteInput)
+document.addEventListener("keydown", deleteInput);
 
 // populate the display
 function updateDisplay(one) {
@@ -61,7 +61,7 @@ function updateDisplaySum(one) {
 
 // make the result number pretty 
 function trimResult (number) {
-    return parseFloat(Number(number.toFixed(2)))
+    return parseFloat(Number(number.toFixed(2)));
 };
 
 // stop remembering the second number when the = is pressed
@@ -199,7 +199,7 @@ function handleInteraction(event) {
                 continueLoop1 = true;
                 continueLoop2 = true;
                 continueLoop3 = true;
-            }
+            };
         };
     } else if (event.type === "click") {
         if (continueLoop1 == true) {
@@ -236,6 +236,6 @@ function handleInteraction(event) {
             continueLoop1 = true;
             continueLoop2 = true;
             continueLoop3 = true;
-        }
+        };
     };
 };
